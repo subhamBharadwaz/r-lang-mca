@@ -1,0 +1,51 @@
+Q. Install the inbuilt datasets available with R programming using 
+> install.packages("datasets.load")
+Display the dataset airquality using the command
+> datasets::airquality
+Study the variables and observations of the data set. Remove all the observations of NA using 
+any method and then draw a scatter plot between Ozone and Solar Radiation variables. 
+Perform a linear regression analysis by between Ozone and Solar Radiation. Explain the 
+selection of independent and dependent variables. Also, explain the output of the regression
+
+ANS
+# Load the datasets package (if not already loaded)
+library(datasets)
+
+# Display the airquality dataset
+data(airquality)
+head(airquality)  # Display the first few rows of the dataset
+
+# Step 1: Remove observations with NA values
+airquality_cleaned <- na.omit(airquality)
+
+# Step 2: Draw a scatter plot between Ozone and Solar Radiation variables
+plot(airquality_cleaned$Ozone, airquality_cleaned$Solar.R, xlab = "Ozone", ylab = "Solar Radiation", main = "Scatter Plot")
+
+# Step 3: Perform linear regression analysis
+lm_result <- lm(Solar.R ~ Ozone, data = airquality_cleaned)
+
+# Step 4: Print the summary of the regression analysis
+summary(lm_result)
+
+
+Explanation of Linear Regression:
+In the linear regression analysis, we are trying to model the relationship between two variables: Ozone (independent variable) and Solar Radiation (dependent variable).
+
+a) Independent Variable (Predictor): Ozone
+The independent variable, Ozone, is the predictor variable. It is the variable we believe may have an effect on the dependent variable (Solar Radiation). We assume that changes in the Ozone concentration might influence the Solar Radiation levels.
+
+b) Dependent Variable (Response): Solar Radiation
+The dependent variable, Solar Radiation, is the response variable. It is the variable we want to predict or explain based on the values of the independent variable (Ozone). In this case, we are trying to understand how changes in Ozone might impact Solar Radiation levels.
+
+Output of Regression:
+The output of the linear regression analysis (obtained from summary(lm_result)) provides various statistics and information about the regression model:
+
+a) Coefficients: The estimated coefficients of the regression model. In this case, we have an intercept term and the coefficient for the Ozone variable.
+
+b) Standard Errors: The standard errors associated with the coefficient estimates, which indicate the precision of the estimates.
+
+c) t-values and p-values: The t-values test whether the coefficients are significantly different from zero. The p-values determine the significance level. If a p-value is small (e.g., < 0.05), it suggests that the variable is likely to have a significant effect on the dependent variable.
+
+d) R-squared: The R-squared value measures the proportion of the variance in the dependent variable (Solar Radiation) that can be explained by the independent variable (Ozone). A higher R-squared value (close to 1) indicates a better fit of the model to the data.
+
+e) Residuals: The residuals are the differences between the actual values and the predicted values of the dependent variable. The residual plot helps assess the model's fit to the data.

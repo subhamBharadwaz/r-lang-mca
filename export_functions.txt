@@ -1,0 +1,67 @@
+Q. Explore different functions in R about strings, arrays, vectors, factors. You may also explore 
+different methods of plotting the data
+
+ANS
+1. Strings:
+
+i) paste(): Concatenate strings together.
+ii) strsplit(): Split a string into substrings based on a delimiter.
+iii) gsub(): Replace occurrences of a pattern in a string with a specified replacement.
+iv) toupper(): Convert characters to uppercase.
+v) tolower(): Convert characters to lowercase.
+
+2. Arrays:
+
+array(): Create a multi-dimensional array.
+dim(): Get the dimensions of an array.
+apply(): Apply a function to margins of an array (rows or columns).
+rbind(): Combine arrays by row binding.
+cbind(): Combine arrays by column binding.
+
+
+
+
+3. Vectors:
+
+c(): Create a vector.
+length(): Get the length of a vector.
+sum(): Calculate the sum of vector elements.
+mean(): Calculate the mean of vector elements.
+min(), max(): Find the minimum and maximum values in a vector.
+
+
+4. Factors:
+factor(): Convert a vector into a factor.
+levels(): Get the levels (unique values) of a factor.
+table(): Create a frequency table for a factor.
+cut(): Create intervals and convert numeric data to a factor based on those intervals.
+reorder(): Reorder levels of a factor based on the values of another variable.
+
+Different methods of plotting data:
+
+1. Base R plots:
+plot(): Create scatter plots, line plots, bar plots, etc.
+hist(): Create histograms.
+boxplot(): Create box plots.
+pie(): Create pie charts.
+
+
+2. ggplot2:
+
+ggplot(): Create complex and customizable plots using a grammar of graphics approach.
+geom_point(), geom_line(), geom_bar(): Add points, lines, and bars to the plot.
+geom_histogram(), geom_boxplot(): Create histograms and box plots using ggplot2.
+
+
+3. lattice:
+
+xyplot(): Create conditioned scatter plots (xy-plots) with panels.
+barchart(): Create conditioned bar charts.
+bwplot(): Create conditioned box-and-whisker plots.
+
+
+4. Plotly:
+
+plot_ly(): Create interactive and 3D plots.
+add_trace(): Add traces to the plot for multiple data series.
+layout(): Customize the layout and appearance of the plot.

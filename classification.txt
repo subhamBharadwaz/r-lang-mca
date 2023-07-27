@@ -1,0 +1,55 @@
+Q. Perform classification and clustering for easily available datasets
+
+
+ANS
+
+1. Classification Example using the Iris Dataset:
+The Iris dataset is a built-in dataset in R and contains measurements of iris flowers, along with their species (class) as the target variable.
+
+# Load required libraries
+library(dplyr)
+library(caret)
+
+# Step 1: Load the Iris dataset
+data(iris)
+
+# Step 2: Split the data into training and testing sets
+set.seed(123)  # For reproducibility
+train_indices <- sample(1:nrow(iris), 0.7 * nrow(iris))  # 70% for training, 30% for testing
+train_data <- iris[train_indices, ]
+test_data <- iris[-train_indices, ]
+
+# Step 3: Create a classification model (e.g., Logistic Regression)
+classification_model <- train(Species ~ ., data = train_data, method = "glm")
+
+# Step 4: Make predictions on the test data using the model
+predictions <- predict(classification_model, newdata = test_data)
+
+# Step 5: Evaluate the classification performance
+confusion_matrix <- table(predictions, test_data$Species)
+print(confusion_matrix)
+
+
+2. Classification Example using the Iris Dataset:
+The Iris dataset is a built-in dataset in R and contains measurements of iris flowers, along with their species (class) as the target variable.
+
+# Load required libraries
+library(dplyr)
+
+# Step 1: Load the USArrests dataset
+data("USArrests")
+
+# Step 2: Select the variables to be used for clustering
+cluster_data <- USArrests
+
+# Step 3: Perform k-means clustering with k=3
+k <- 3
+kmeans_model <- kmeans(cluster_data, centers = k)
+
+# Step 4: Add the cluster labels to the original dataset
+USArrests$ClusterLabel <- as.factor(kmeans_model$cluster)
+
+# Step 5: View the distribution of states across clusters
+cluster_distribution <- table(USArrests$ClusterLabel)
+print(cluster_distribution)
+

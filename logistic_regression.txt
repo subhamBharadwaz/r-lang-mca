@@ -1,0 +1,62 @@
+Q. Study the data set of iris from the given dataset. Use first 100 records of this data set into a 
+separately data frame. Create a logistic regression model first using just one variable (say
+using Sepal.Length) to answer the question “If the Species is Setosa or not?”. Test your 
+model. Explain your results
+
+ANS
+# Load the datasets package (if not already loaded)
+library(datasets)
+
+# Load the iris dataset
+data(iris)
+
+# Extract the first 100 records into a separate data frame
+iris_subset <- iris[1:100, ]
+
+# Step 1: Convert Species into a binary outcome (Setosa or not Setosa)
+iris_subset$Species <- ifelse(iris_subset$Species == "setosa", 1, 0)
+
+# Step 2: Perform logistic regression using Sepal.Length as the predictor
+logit_model <- glm(Species ~ Sepal.Length, data = iris_subset, family = binomial)
+
+# Step 3: Print the summary of the logistic regression model
+summary(logit_model)
+
+
+Explanation of Logistic Regression Results:
+In the logistic regression analysis, we are trying to predict whether the flower species is Setosa or not (binary outcome) based on the Sepal.Length variable.
+
+a) Binary Outcome: Species (Setosa or not Setosa)
+We convert the "Species" variable into a binary outcome, where 1 represents "Setosa" and 0 represents "not Setosa." This allows us to perform logistic regression, which is suitable for binary classification problems.
+
+b) Predictor Variable: Sepal.Length
+The predictor variable, "Sepal.Length," is the variable we use to make predictions about the binary outcome. We assume that the Sepal.Length might be a good indicator of whether a flower belongs to the Setosa species.
+
+Interpreting the Logistic Regression Model:
+The summary of the logistic regression model provides information about the coefficients of the model. These coefficients represent the log odds of the outcome (Setosa) given a one-unit increase in the predictor variable (Sepal.Length). The exponentiated coefficients (odds ratios) can be used to interpret the impact on the odds of the outcome.
+
+For example, the coefficient for "Sepal.Length" represents the log odds of a flower being Setosa given a one-unit increase in Sepal.Length. If the coefficient is positive, it suggests that higher Sepal.Length increases the odds of the flower being Setosa.
+
+The p-value associated with the "Sepal.Length" coefficient indicates whether the relationship between Sepal.Length and the outcome is statistically significant. A small p-value (e.g., < 0.05) suggests a significant relationship.
+
+Testing the Model:
+To test the model's performance, we can use the model to predict the probability of a flower being Setosa based on its Sepal.Length. We can then set a threshold (e.g., 0.5) to classify the flower as Setosa or not Setosa.
+
+# Step 4: Predict probabilities for the first 100 records
+predicted_probabilities <- predict(logit_model, newdata = iris_subset, type = "response")
+
+# Step 5: Set a threshold to classify as Setosa or not Setosa
+predicted_classes <- ifelse(predicted_probabilities >= 0.5, 1, 0)
+
+# Step 6: Compare the predicted classes with the actual classes
+confusion_matrix <- table(Actual = iris_subset$Species, Predicted = predicted_classes)
+print(confusion_matrix)
+
+
+The confusion matrix will show the number of correct predictions (true positives and true negatives) and incorrect predictions (false positives and false negatives) made by the model. You can evaluate the model's performance using metrics like accuracy, sensitivity, specificity, precision, and recall.
+
+
+
+
+
+

@@ -1,0 +1,95 @@
+Q. Store content in external files for the following types of data in R: 
+(i) Vectors (ii) Lists (iii) Arrays (iv) Data frames (v) Factors
+Read those contents into R. Perform operations link sorting on vector data, finding the length 
+of lists and adding data items in list, accessing different elements of array and comparing it to 
+other values, accessing different components of data frames and factors
+
+
+ANS:
+To store and read content from external files for the different types of data in R, you can use various file formats. Below are examples for each type of data:
+
+(i) Vectors:
+To store a vector in an external file, you can use a simple text file with one value per line. For example, you can use the writeLines() function to write the vector to a file and scan() or readLines() to read it back.
+
+# Create a vector
+my_vector <- c(1, 2, 3, 4, 5)
+
+# Write the vector to an external file
+writeLines(as.character(my_vector), "vector_data.txt")
+
+# Read the vector from the external file
+read_vector <- as.numeric(scan("vector_data.txt"))
+
+# Perform operations on the vector data
+sorted_vector <- sort(my_vector)
+cat("Sorted vector:", sorted_vector, "\n")
+
+(ii) Lists:
+For lists, you can use the JSON or CSV file format to store the data.
+
+# Create a list
+my_list <- list(a = 1, b = "hello", c = TRUE)
+
+# Write the list to an external file (using JSON format)
+library(jsonlite)
+writeLines(toJSON(my_list), "list_data.json")
+
+# Read the list from the external file
+read_list <- fromJSON(readLines("list_data.json"))
+
+# Perform operations on the list data
+list_length <- length(my_list)
+cat("Length of the list:", list_length, "\n")
+
+(iii) Arrays:
+For arrays, you can use CSV or text files to store the data. Since arrays are multi-dimensional, you might need to flatten them before storing.
+
+# Create an array
+my_array <- array(1:12, dim = c(3, 4))
+
+# Flatten the array and write it to an external file (using CSV format)
+write.csv(as.vector(my_array), "array_data.csv", row.names = FALSE)
+
+# Read the array from the external file and reshape it
+read_array <- matrix(scan("array_data.csv"), nrow = 3, byrow = TRUE)
+
+# Perform operations on the array data
+array_element <- my_array[2, 3]
+cat("Array element (2nd row, 3rd column):", array_element, "\n")
+
+
+(iv) Data frames:
+Data frames can be stored in CSV, Excel, or other tabular formats.
+
+# Create a data frame
+my_df <- data.frame(Name = c("John", "Alice", "Bob"),
+                    Age = c(25, 30, 28),
+                    Score = c(85, 92, 78))
+
+# Write the data frame to an external file (using CSV format)
+write.csv(my_df, "data_frame_data.csv", row.names = FALSE)
+
+# Read the data frame from the external file
+read_df <- read.csv("data_frame_data.csv")
+
+# Perform operations on the data frame
+df_subset <- my_df[1:2, c("Name", "Score")]
+cat("Subset of the data frame:\n")
+print(df_subset)
+
+
+(v) Factors:
+Factors can be stored in CSV files as character vectors, and you can convert them back to factors after reading.
+
+# Create a factor
+my_factor <- factor(c("Red", "Green", "Blue", "Red", "Green", "Blue"))
+
+# Write the factor to an external file (using CSV format)
+write.csv(as.character(my_factor), "factor_data.csv", row.names = FALSE)
+
+# Read the factor from the external file and convert it back to a factor
+read_factor <- factor(scan("factor_data.csv", what = "", sep = ","))
+
+# Perform operations on the factor
+factor_levels <- levels(my_factor)
+cat("Factor levels:", factor_levels, "\n")
